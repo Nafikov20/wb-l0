@@ -1,0 +1,10 @@
+@import "../styles/normalize.css";
+@import '../styles/variables.css';
+.footer {
+    padding: 24px;
+    color: var(--color-footer);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+}

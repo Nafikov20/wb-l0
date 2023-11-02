@@ -1,11 +1,15 @@
 :root {
     --color-violet: #6725A8;
     --color-white: #fff;
+    --color-footer: #FFFFFFB2;
     --color-smoky: #F6F6FA;
     --color-gray: #9797AF;
+    --color-gray-line: #00000033;
+    --color-ruler: #0000001A;
     --color-green: #0CB477;
     --color-magenta: #CB11AB;
     --color-magenta-opacity: #CB11AB33;
     --color-black: #000;
     --color-notification: #FF3B30;
+
 }
