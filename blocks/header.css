@@ -135,15 +135,3 @@
     line-height: 16px;
 }
 
-.header__cart-quantity {
-    position: absolute;
-    padding: 1px 5px;
-    border-radius: 16px;
-    background: var(--color-notification);
-    font-size: 10px;
-    font-weight: 700;
-    line-height: 13px;
-    color: var(--color-white);
-    top: -3px;
-    right: 0;
-}

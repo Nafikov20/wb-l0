@@ -49,3 +49,30 @@ button {
     background-color: transparent;
     cursor: pointer;
 }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; // Yeah, yeah everybody write about it
+}
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus {
+    appearance: none;
+    -moz-appearance: textfield;
+}
+input {outline:none;}
+
+.notification {
+    position: absolute;
+    padding: 1px 5px;
+    border-radius: 16px;
+    background: var(--color-notification);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 13px;
+    color: var(--color-white);
+    top: -3px;
+    right: 0;
+}
+
+
