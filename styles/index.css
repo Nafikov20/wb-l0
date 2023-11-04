@@ -34,3 +34,13 @@ html, body {
 .header, .main__cart-container, .footer {
     max-width: 1400px;
 }
+
+.btn__delete svg,
+.btn__favorite svg {
+    fill: var(--color-black);
+}
+
+.btn__delete svg:hover,
+.btn__favorite svg:hover{
+    fill: var(--color-notification);
+}

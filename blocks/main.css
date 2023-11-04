@@ -260,24 +260,8 @@ main {
     justify-content: end;
     gap: 16px;
 }
-.missing__item-quantity-btn__delete svg,
-.products__item-quantity-btn__delete svg,
-.missing__item-quantity-btn__favorite svg,
-.products__item-quantity-btn__favorite svg {
-    fill: var(--color-black);
-}
-.missing__item-quantity-btn__delete svg:hover,
-.products__item-quantity-btn__delete svg:hover,
-.missing__item-quantity-btn__favorite svg:hover,
-.products__item-quantity-btn__favorite svg:hover{
-    fill: var(--color-notification);
-}
-.products__item-quantity-btn__delete {
 
-}
-.products__item-price-price {
 
-}
 .products__item-price-new {
     display: flex;
     flex-wrap: wrap;
