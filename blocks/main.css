@@ -41,7 +41,7 @@ main {
 
 .main__cart-container {
     padding: 0 24px;
-    gap: 15px;
+    gap: 32px;
 
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -288,6 +288,9 @@ main {
     border-radius: 16px;
     padding: 16px 24px 24px 24px;
     margin-bottom: 16px;
+}
+.recipient__items {
+    margin-bottom: 50px;
 }
 .delivery__items-head,
 .payment__items-head {

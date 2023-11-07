@@ -232,7 +232,7 @@
                                 <p>Бишкек, улица Ахматбека Суюмбаева, 12/1</p>
                                 <span>
                                     <img src="./assets/icons/star.svg" alt="Звезда">
-                                    4.99 Ежедневно с 10 до 21
+                                    <span>4.99</span> Ежедневно с 10 до 21
                                 </span>
                             </div>
                             <div class="delivery__items-grid-rigth"><p>Бесплатно</p></div>
@@ -289,7 +289,7 @@
                             </div>
                             <div class="payment-edit__num">
                                 <p>1234 56•• •••• 1234</p>
-                                <p>01/30</p>
+                                <p class="payment-edit__num-date">01/30</p>
                             </div>
                         </div>
                         <span>Спишем оплату с карты при получении</span>
@@ -447,62 +447,67 @@
         <div class="dialog__wrapper dialog__payment">
             <div class="dialog__wrapper-head">
                 <h3>Способ оплаты</h3>
-                <button type="button" id="close-payment-modal">
+                <button type="button" class="close-modal" id="close-payment-modal">
                     <img src="./assets/icons/close.svg" alt="">
                 </button>
             </div>
             <div class="dialog-payment__card-wrapper">
-                <form action="#">
-                    <div class="payment-card__wrapper">
-                        <label class="custom-radio">
-                            <input type="radio" checked>
-                            <span></span>
-                        </label>
-                        <div class="payment-edit__logo">
-                            <img src="./assets/icons/mir.svg" alt="">
+                <form action="#" class="payment-dialog__form">
+                    <div class="dialog-payment__card-wrapper-form">
+                        <div class="payment-card__wrapper">
+                            <label class="custom-radio">
+                                <input type="radio" name="card" id="card-1" checked>
+                                <span></span>
+                            </label>
+                            <div class="payment-edit__logo">
+                                <img src="./assets/icons/mir.svg" alt="">
+                            </div>
+                            <span>1234 56•• •••• 1234</span>
                         </div>
-                        <span>1234 56•• •••• 1234</span>
+                        <div class="payment-card__wrapper">
+                            <label  class="custom-radio">
+                                <input type="radio" name="card" id="card-2">
+                                <span></span>
+                            </label>
+                            <div class="payment-edit__logo">
+                                <img src="./assets/icons/visa.svg" alt="">
+                            </div>
+                            <span>1234 56•• •••• 1234</span>
+                        </div>
+                        <div class="payment-card__wrapper">
+                            <label  class="custom-radio">
+                                <input type="radio" name="card" id="card-3">
+                                <span></span>
+                            </label>
+                            <div class="payment-edit__logo">
+                                <img src="./assets/icons/mastercard.svg" alt="">
+                            </div>
+                            <span>1234 56•• •••• 1234</span>
+                        </div>
+                        <div class="payment-card__wrapper">
+                            <label  class="custom-radio">
+                                <input type="radio" name="card" id="card-4">
+                                <span></span>
+                            </label>
+                            <div class="payment-edit__logo">
+                                <img src="./assets/icons/maestro.svg" alt="">
+                            </div>
+                            <span>1234 56•• •••• 1234</span>
+                        </div>
                     </div>
-                    <div class="payment-card__wrapper">
-                        <label  class="custom-radio">
-                            <input type="radio">
-                            <span></span>
-                        </label>
-                        <div class="payment-edit__logo">
-                            <img src="./assets/icons/visa.svg" alt="">
-                        </div>
-                        <span>1234 56•• •••• 1234</span>
-                    </div>
-                    <div class="payment-card__wrapper">
-                        <label  class="custom-radio">
-                            <input type="radio">
-                            <span></span>
-                        </label>
-                        <div class="payment-edit__logo">
-                            <img src="./assets/icons/mastercard.svg" alt="">
-                        </div>
-                        <span>1234 56•• •••• 1234</span>
-                    </div>
-                    <div class="payment-card__wrapper">
-                        <label  class="custom-radio">
-                            <input type="radio">
-                            <span></span>
-                        </label>
-                        <div class="payment-edit__logo">
-                            <img src="./assets/icons/maestro.svg" alt="">
-                        </div>
-                        <span>1234 56•• •••• 1234</span>
+                    <div class="dialog-payment__card-wrapper-btn">
+                        <button type="submit" class="dailog__choose-btn">Выбрать</button>
                     </div>
                 </form>
             </div>
-            <button class="dailog__choose-btn">Выбрать</button>
+
         </div>
     </dialog>
     <dialog id="shipping-modal" class="dialog-ship">
         <div class="dialog__wrapper">
             <div class="dialog__wrapper-head">
                 <h3>Способ доставки</h3>
-                <button type="button" id="close-ship-modal">
+                <button type="button" class="close-modal" id="close-ship-modal">
                     <img src="./assets/icons/close.svg" alt="">
                 </button>
             </div>
@@ -512,8 +517,8 @@
             </div>
             <h6 class="dialog__sipp-my-address">Мои адреса</h6>
             <div class="dialog-ship__address-wrapper">
-                <form action="#">
-                    <div class="ship-address__wrapper-point ship-address__hidden">
+                <form action="#" class="ship-dialog__form">
+                    <div class="ship-address__wrapper-point ">
                         <div class="ship-address__point">
                             <label class="custom-radio">
                                 <input type="radio" name="address" id="point-1" data-type='point' checked>
@@ -578,7 +583,7 @@
                         </div>
                     </div>
 
-                    <div class="ship-address__wrapper-courier">
+                    <div class="ship-address__wrapper-courier ship-address__hidden">
                         <div class="ship-address__courier">
                             <label class="custom-radio">
                                 <input type="radio" name="address" id="courier-1" data-type='courier'>
