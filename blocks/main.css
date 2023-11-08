@@ -70,12 +70,29 @@ main {
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
+
 }
+.cart__accordion-btn img {
+    transition: all .2s ease-in-out;
+}
+.active-img {
+    transition: all .2s ease-in-out;
+    transform: rotateX(180deg);
+}
+
 .missing__items,
 .products__items {
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
+}
+.accordion-hidd {
+    height: 0;
+}
+.products__items-wrapper,
+.missing__items-wrapper {
+    overflow: hidden;
+    transition: all 5s ease;
 }
 .products__item-description {
     display: flex;
@@ -163,6 +180,7 @@ main {
 .products__item-price {
     width: 226px;
     display: flex;
+    gap: 5px;
     flex-shrink: 0;
     justify-content: space-between;
 }
