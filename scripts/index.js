@@ -249,12 +249,12 @@ function updatePrice(product, newValue) {
 
 // Выбор товара
 
-const products = document.querySelectorAll('.products__items');
+const productsSelect = document.querySelectorAll('.products__items');
 const selectAllButton = document.querySelector('#all-products');
 
 selectAllButton.addEventListener('change', () => {
     const isCheckedAll = selectAllButton.checked;
-    products.forEach(product => {
+    productsSelect.forEach(product => {
         const productInput = product.querySelector('.custom-checkbox input');
         productInput.checked = isCheckedAll;
     });
@@ -264,10 +264,10 @@ selectAllButton.addEventListener('change', () => {
     calculateTotal();
 });
 
-products.forEach(product => {
+productsSelect.forEach(product => {
     const productInput = product.querySelector('.custom-checkbox input');
     productInput.addEventListener('change', () => {
-        selectAllButton.checked = Array.from(products).some(product => {
+        selectAllButton.checked = Array.from(productsSelect).every(product => {
             const productInput = product.querySelector('.custom-checkbox input');
             return productInput.checked;
         });
@@ -281,7 +281,7 @@ products.forEach(product => {
 function calculateTotal() {
     let totalSum = 0;
 
-    products.forEach(product => {
+    productsSelect.forEach(product => {
         const productCheckbox = product.querySelector('.custom-checkbox input');
         const productPrice = parseFloat(product.querySelector('.products__item-price-new h5').innerText);
 
@@ -289,10 +289,24 @@ function calculateTotal() {
             totalSum += productPrice;
         }
     });
-   const totalPrice = document.querySelector('.cart-total__price-result-sum')
-    totalPrice.textContent = totalSum;
 
+    const totalPriceElement = document.querySelector('.cart-total__price-result-sum');
+    totalPriceElement.textContent = totalSum;
+
+    const totalPayCheckbox = document.querySelector('#total-pay');
+    const totalPayBtn = document.querySelector('.cart-total__order-btn');
+    const hiddTitleTotalPay = document.querySelector('.cart-total__pay-subtitle');
+
+    if (totalPayCheckbox.checked) {
+        totalPayBtn.textContent = `Отплатить ${totalSum} сум`;
+    } else {
+        totalPayBtn.textContent = 'Заказать';
+    }
+
+    hiddTitleTotalPay.style.display = totalPayCheckbox.checked ? 'none' : 'block';
 }
+
+
 // Функция для изменения окончания слова "товар"
 function getDeclension(quantity) {
     const cases = [2, 0, 1, 1, 1, 2];
@@ -308,11 +322,191 @@ let totalQuantity = 0;
 function calculateTotalQuantity() {
     totalQuantity = 0;
 
-    document.querySelectorAll('.products__item-count-input').forEach(input => {
-        totalQuantity += +input.value;
+    productsSelect.forEach(product => {
+        const productCheckbox = product.querySelector('.custom-checkbox input');
+        const productQuantity = +product.querySelector('.products__item-count-input').value;
+
+        if (productCheckbox.checked) {
+            totalQuantity += productQuantity;
+        }
     });
 
     // Обновление отображения общего количества товаров на странице
     const declension = getDeclension(totalQuantity);
     document.querySelector('.total-quantity').textContent = `${totalQuantity} ${declension}`;
 }
+
+function deleteProduct(event) {
+    const productElement = event.target.closest('.products__items');
+    const productID = productElement.dataset.id;
+
+    if (productID) {
+        updatePrice(productID, 0)
+    }
+    productElement.remove();
+}
+
+// Удаление товаров
+const deleteButtons = document.querySelectorAll('.btn__delete-product');
+deleteButtons.forEach(button => button.addEventListener('click', deleteProduct))
+
+const missingItemsDeleteButtons = document.querySelectorAll('.btn__delete-missing');
+
+missingItemsDeleteButtons.forEach(button => {
+    button.addEventListener('click', deleteMissingProduct);
+});
+
+function deleteMissingProduct(event) {
+    const missingItemElement = event.target.closest('.missing__items');
+    missingItemElement.remove();
+
+    // Обновление количества отсутствующих товаров
+    const missingItemsCount = document.querySelectorAll('.missing__items').length;
+    updateMissingItemsCount(missingItemsCount);
+}
+
+function updateMissingItemsCount(count) {
+    const missingCountProductElement = document.querySelector('.missing__count-product');
+    missingCountProductElement.textContent = `Отсутствуют · ${count} товар${getCorrectEnding(count)}`;
+}
+
+function getCorrectEnding(count) {
+    if (count === 1) {
+        return '';
+    } else if (count >= 2 && count <= 4) {
+        return 'a';
+    } else {
+        return 'ов';
+    }
+}
+// Изменение кнопки при нажатии на чекбокс заказа
+const totalPayCheckbox = document.querySelector('#total-pay');
+const hiddTitleTotalPay = document.querySelector('.cart-total__pay-subtitle');
+const totalPayBtn = document.querySelector('.cart-total__order-btn');
+totalPayCheckbox.addEventListener('change', () => {
+    calculateTotal();
+});
+
+
+//включение кнопки "нравиться"
+const favoritBtns = document.querySelectorAll('.btn__favorite');
+favoritBtns.forEach((favorit) => {
+    favorit.addEventListener('click', () => {
+        favorit.classList.toggle('active-favorit');
+    })
+})
+
+
+
+
+
+
+//Валидация формы
+const form = document.querySelector('.recipient__items form');
+const inputs = form.querySelectorAll('input');
+
+inputs.forEach(input => {
+    input.addEventListener('input', function (event) {
+        const inputValue = event.target.value;
+        const inputType = input.id;
+
+        const validationRules = {
+            name: /^[a-zA-Zа-яА-ЯЁё\s-]+$/,
+            surname: /^[a-zA-Zа-яА-ЯЁё\s-]+$/,
+            email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+            tel: /^\+\d\s\d{3}\s\d{3}\s\d{2}\s\d{2}$/,
+            inn: /^\d{12}$/
+        };
+
+        if (inputType === 'tel') {
+            handleTelInputChange(input);
+            validateRussianPhoneNumber(inputValue, input);
+        } else {
+            validateInput(inputValue, inputType, validationRules, input);
+        }
+
+        updatePlaceholder(input);
+    });
+});
+
+function handleTelInputChange(input) {
+    const inputValue = input.value.replace(/\D/g, '');
+    let formattedValue = formatTelNumber(inputValue);
+    input.value = formattedValue;
+}
+
+function formatTelNumber(number) {
+    let formattedValue = '';
+    let currentPos = 1;
+
+    for (let i = 0; i < number.length; i++) {
+        if (currentPos === 1) {
+            formattedValue += '+';
+        } else if (currentPos === 2 || currentPos === 5 || currentPos === 8 || currentPos === 10) {
+            formattedValue += ' ';
+        }
+        formattedValue += number[i];
+        currentPos++;
+    }
+
+    return formattedValue;
+}
+
+function validateInput(value, type, rules, input) {
+    const regex = rules[type];
+
+    if (!regex.test(value)) {
+        input.setCustomValidity(getErrorMessage(type));
+        showWarning(input);
+    } else {
+        input.setCustomValidity('');
+        hideWarning(input);
+    }
+}
+
+function validateRussianPhoneNumber(value, input) {
+    const russianPhoneRegex = /^\+\d\s\d{3}\s\d{3}\s\d{2}\s\d{2}$/;
+
+    if (!russianPhoneRegex.test(value)) {
+        input.setCustomValidity(getErrorMessage('tel'));
+        showWarning(input);
+    } else {
+        input.setCustomValidity('');
+        hideWarning(input);
+    }
+}
+
+function getErrorMessage(inputType) {
+    const errorMessages = {
+        name: 'Укажите имя',
+        surname: 'Укажите фамилию',
+        email: 'Проверьте адрес электронной почты',
+        tel: 'Формат: +7 (XXX) XXX-XX-XX',
+        inn: 'Введите корректный ИНН (12 цифр)'
+    };
+
+    return errorMessages[inputType];
+}
+
+function showWarning(input) {
+    const warningSpan = input.parentElement.querySelector('.input__warning');
+    warningSpan.textContent = getErrorMessage(input.id);
+    warningSpan.style.color = 'red';
+}
+
+function hideWarning(input) {
+    const warningSpan = input.parentElement.querySelector('.input__warning');
+    warningSpan.textContent = '';
+}
+
+function updatePlaceholder(input) {
+    const label = input.parentElement;
+    const placeholder = label.querySelector('.input__placeholder');
+
+    if (input.value !== '') {
+        placeholder.classList.add('active-placeholder');
+    } else {
+        placeholder.classList.remove('active-placeholder');
+    }
+}
+

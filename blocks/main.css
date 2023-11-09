@@ -449,6 +449,10 @@ main {
     top: -24px;
     font-size: 13px;
 }
+.active-placeholder {
+    top: -24px !important;
+    font-size: 13px !important;
+}
     /*.main__cart-right {*/
 /*    width: calc(100/12*3 - 40px);*/
 /*}*/
