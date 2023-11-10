@@ -31,6 +31,13 @@ html, body {
     }
 }
 
+@media(max-width: 350px) {
+    .header, .main__cart-container {
+        padding: 0 13px;
+    }
+}
+
+
 .header, .main__cart-container, .footer {
     max-width: 1400px;
 }

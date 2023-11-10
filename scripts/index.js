@@ -381,8 +381,6 @@ function getCorrectEnding(count) {
 }
 // Изменение кнопки при нажатии на чекбокс заказа
 const totalPayCheckbox = document.querySelector('#total-pay');
-const hiddTitleTotalPay = document.querySelector('.cart-total__pay-subtitle');
-const totalPayBtn = document.querySelector('.cart-total__order-btn');
 totalPayCheckbox.addEventListener('change', () => {
     calculateTotal();
 });
@@ -431,8 +429,7 @@ inputs.forEach(input => {
 
 function handleTelInputChange(input) {
     const inputValue = input.value.replace(/\D/g, '');
-    let formattedValue = formatTelNumber(inputValue);
-    input.value = formattedValue;
+    input.value = formatTelNumber(inputValue);
 }
 
 function formatTelNumber(number) {
